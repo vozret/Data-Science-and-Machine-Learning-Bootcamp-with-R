@@ -17,3 +17,4 @@ print(pl + geom_bar(aes(fill=drv)))
 
 print(pl + geom_bar(aes(fill=drv), position="dodge"))
 
+print(pl + geom_bar(aes(fill=drv), position="fill"))
