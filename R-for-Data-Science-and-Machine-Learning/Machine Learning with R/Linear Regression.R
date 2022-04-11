@@ -96,6 +96,66 @@ head(res)
 print(ggplot(res, aes(res)) + geom_histogram(fill = "blue", alpha = 0.5))
 
 
+#### PART 3
+
+plot(model)
+
+# getting the predictions of our model
+
+G3.predictions <- predict(model, test)
+
+# getting the RMSE
+results <- cbind(G3.predictions, test$G3)
+colnames(results) <- c("predicted", "actual")
+results <- as.data.frame(results)
+
+head(results)
+
+# take care of negative values
+to_zero <- function(x) {
+  if (x < 0) {return (0)}
+  else {return (x)}
+}
+
+# apply zero function
+results$predicted <- sapply(results$predicted, to_zero)
+
+## mean squared error
+
+mse <- mean((results$actual - results$predicted)^2)
+print("MSE")
+print(mse)
+
+## RMSE
+
+print("RMSE")
+print(mse^0.5)
+
+
+####################
+# sum of squared errors
+SSE <- sum( (results$predicted - results$actual)^2 )
+SST <- sum( (mean(df$G3) - results$actual)^2 )
+
+R2 <- 1 - SSE/SST
+print("R2")
+print(R2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
